@@ -1,0 +1,12 @@
+{
+  "name": "react-native-sdkx",
+  "displayName": "react-native-sdkx",
+  "expo": {
+    "name": "react-native-sdkx",
+    "slug": "react-native-sdkx",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
