@@ -100,6 +100,21 @@ export function Dashboard({ navigation }) {
     },
   ];
 
+  useEffect(()=>{
+    SDKX.prefetchAds({
+            adUnits:["float-4839"],
+            onAdPrefetched:(data)=>{
+                console.log("Ad Prefetched",data)
+            },
+            onAdPrefetchFailed:(unitId,cause) => {
+                console.log("Ad Prefetch Failed",unitId,cause)
+            },
+            onPrefetchComplete:()=>{
+                console.log("Ad Prefetch completed")
+            }
+        })
+  })
+
   return (
     <>
       <ScrollView
@@ -180,7 +195,21 @@ export function Dashboard({ navigation }) {
                     <TouchableHighlight
                       key={index}
                       onPress={() => {
-                        Actions.placedetail({ place: element });
+                        SDKX.loadInterstitialAd("float-4839").then(()=>{
+                            SDKX.showInterstitialAd({
+                                onAdLeftApplication:()=>{
+                                },
+                                    onAdClosed:()=>{
+                                    Actions.placedetail({ place: element });
+                                    },
+                                onAdOpened:()=>{
+                                }
+                 
+                            })
+                        }).catch((e)=>{
+                            console.log("Failed to load inter ad ",e)
+                            Actions.placedetail({ place: element });
+                        })
                       }}
                     >
                       <View
