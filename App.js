@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { Router, Scene, Stack } from 'react-native-router-flux';
+import Start from './start/index'
+import { Dashboard } from './start/Dashboard';
+import PlaceDetail from './start/PlaceDetail';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <SafeAreaProvider>
+    <Router>
+      <Stack key="root">
+        <Scene key="dashboard" component={Dashboard}  hideNavBar={true}/>
+        <Scene key="start" component={Start}  initial hideNavBar={true} />
+        <Scene key="placedetail" component={PlaceDetail} hideNavBar={true} />
+      </Stack>
+    </Router>
+    </SafeAreaProvider>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

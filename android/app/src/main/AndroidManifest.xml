@@ -29,6 +29,10 @@
     android:allowBackup="false"
     android:theme="@style/AppTheme"
   >
+  <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>
     <activity
@@ -39,6 +43,7 @@
       android:windowSoftInputMode="adjustResize"
       android:theme="@style/Theme.App.SplashScreen"
     >
+    
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
