@@ -160,38 +160,6 @@ export default function Start() {
               </Text>
             </View>
           </View>
-          {/* <PagerView
-            style={{
-              height: 600,
-              width: "100%",
-              backgroundColor: "green",
-            }}
-          >
-            {pageData.forEach((page,index) => {
-              console.log(page)
-              return (
-                <View key={index}
-                  style={{
-                    height:800,
-                    width:900,
-                    backgroundColor: "red",
-                    display:'flex',
-                    flexDirection:'column'
-                  }}
-                >
-                    <Image
-                      styles={{
-                        height: 200,
-                        width: 200,
-                      }}
-                      source={page.icon}
-                    />
-                    <Text>{page.title}</Text>
-                    <Text>{page.desc}</Text>
-                  </View>
-              );
-            })}
-          </PagerView> */}
         </View>
 
         {renderPageFooter()}

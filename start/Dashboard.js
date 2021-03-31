@@ -7,7 +7,7 @@ import {
   ImageBackground,
   Image,
   TouchableHighlight,
-  ToastAndroid
+  ToastAndroid,
 } from "react-native";
 import { Button, colors } from "react-native-elements";
 import SDKX, { GGAdview } from "@greedygame/react-native-sdkx";
@@ -17,8 +17,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import { colorsDark } from "react-native-elements/dist/config";
 import { Actions } from "react-native-router-flux";
 
-export function Dashboard({navigation}) {
-
+export function Dashboard({ navigation }) {
   const viewPagerData = [
     {
       type: "content",
@@ -101,13 +100,11 @@ export function Dashboard({navigation}) {
     },
   ];
 
-
   return (
     <>
       <ScrollView
         style={{
-          "height":600
-
+          height: 600,
         }}
       >
         <View
@@ -180,60 +177,74 @@ export function Dashboard({navigation}) {
               switch (element.type) {
                 case "content":
                   return (
-                      <TouchableHighlight
+                    <TouchableHighlight
                       key={index}
-                      onPress={()=>{
-                          Actions.placedetail({place:element})
+                      onPress={() => {
+                        Actions.placedetail({ place: element });
                       }}
-                      >
-                    <View
-                      key={index}
-                      style={{
-                        flex: 1,
-                      }}
-                    
                     >
-                      <ImageBackground
+                      <View
+                        key={index}
                         style={{
                           flex: 1,
                         }}
-                        source={{ uri: element.url }}
                       >
-                        <View
+                        <ImageBackground
                           style={{
-                            display: "flex",
-                            flexDirection: "column",
                             flex: 1,
-                            justifyContent: "center",
-                            alignItems: "flex-start",
-                            marginStart: 24,
                           }}
+                          source={{ uri: element.url }}
                         >
-                          <Text
+                          <View
                             style={{
-                              color: "#ffffff",
-                              fontSize: 52,
-                              fontWeight: "bold",
+                              display: "flex",
+                              flexDirection: "column",
+                              flex: 1,
+                              justifyContent: "center",
+                              alignItems: "flex-start",
+                              marginStart: 24,
                             }}
                           >
-                            {element.title}
-                          </Text>
-                          <Text
-                            style={{
-                              color: "#ffffff",
-                              fontSize: 20,
-                            }}
-                          >
-                            {element.location}
-                          </Text>
-                        </View>
-                      </ImageBackground>
-                    </View>
+                            <Text
+                              style={{
+                                color: "#ffffff",
+                                fontSize: 52,
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {element.title}
+                            </Text>
+                            <Text
+                              style={{
+                                color: "#ffffff",
+                                fontSize: 20,
+                              }}
+                            >
+                              {element.location}
+                            </Text>
+                          </View>
+                        </ImageBackground>
+                      </View>
                     </TouchableHighlight>
                   );
                 default:
                   return (
-                    <GGAdview unitId={element.unitId} style={{ flex: 1 }} />
+                    <GGAdview unitId={element.unitId} style={{ flex: 1 }}
+                      onAdLoaded={() => {
+                        console.log("AdUnit loaded");
+                      }}
+                      onAdLoadFailed={(data) => {
+                        console.log("Failed to load ad",data)
+                      }}
+                      onUiiClosed={() => {
+                        console.log("UII Closed")
+                      }}
+                      onUiiOpened={() => {
+                          console.log("UII Opened")
+                      }}
+                      onReadyForRefresh={() => {
+                       console.log("Ad Unit is ready to refresh")
+                      }} />
                   );
               }
             })}
@@ -266,7 +277,7 @@ export function Dashboard({navigation}) {
                       style={{
                         height: 160,
                         width: 80,
-                        margin:5
+                        margin: 5,
                       }}
                     >
                       <Image
@@ -283,8 +294,8 @@ export function Dashboard({navigation}) {
                           flex: 1,
                           justifyContent: "center",
                           alignItems: "flex-start",
-                          
-                          marginTop:20
+
+                          marginTop: 20,
                         }}
                       >
                         <Text
@@ -310,40 +321,40 @@ export function Dashboard({navigation}) {
                 default:
                   return (
                     <View
-                    key={index}
-                    style={{
-                      height: 160,
-                      width: 80,
-                      marginEnd:25,
-                      marginStart:5,
-                    }}
-                  >
-                    <GGAdview unitId={element.unitId} style={{ height:"100%",width:"100%" }}
-                    onAdLoaded = {()=>{
-                        ToastAndroid.show("AdUnit loaded",ToastAndroid.SHORT)
-                    }}
-                    onAdLoadFailed = {(data) => {
-                        ToastAndroid.show("AdUnit Load failed",ToastAndroid.SHORT)
-                    }}
-                    onUiiClosed = {() => {
-                        ToastAndroid.show("Uii Closed",ToastAndroid.SHORT)
-                    }}
-
-                    onUiiOpened = {() => {
-                        ToastAndroid.show("Uii Opened",ToastAndroid.SHORT)
-                    }}
-                    onReadyForRefresh = {() => {
-                                     ToastAndroid.show("ReadyForRefresh",ToastAndroid.SHORT)
-                    }}
-                    />
+                      key={index}
+                      style={{
+                        height: 160,
+                        width: 80,
+                        marginEnd: 25,
+                        marginStart: 5,
+                      }}
+                    >
+                      <GGAdview
+                        unitId={element.unitId}
+                        style={{ height: "100%", width: "100%" }}
+                        onAdLoaded={() => {
+                          console.log("AdUnit loaded");
+                        }}
+                        onAdLoadFailed={(data) => {
+                          console.log("Failed to load ad",data)
+                        }}
+                        onUiiClosed={() => {
+                          console.log("UII Closed")
+                        }}
+                        onUiiOpened={() => {
+                            console.log("UII Opened")
+                        }}
+                        onReadyForRefresh={() => {
+                         console.log("Ad Unit is ready to refresh")
+                        }}
+                      />
                     </View>
                   );
               }
             })}
           </ScrollView>
         </View>
-        </ScrollView>
-
+      </ScrollView>
     </>
   );
 }

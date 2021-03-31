@@ -54,6 +54,21 @@ export default function PlaceDetail(props) {
              flex:1
             }}
             unitId="float-4727"
+            onAdLoaded={() => {
+                console.log("AdUnit loaded");
+              }}
+              onAdLoadFailed={(data) => {
+                console.log("Failed to load ad",data)
+              }}
+              onUiiClosed={() => {
+                console.log("UII Closed")
+              }}
+              onUiiOpened={() => {
+                  console.log("UII Opened")
+              }}
+              onReadyForRefresh={() => {
+               console.log("Ad Unit is ready to refresh")
+              }}
           />
         </View>
       </ImageBackground>
